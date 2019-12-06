@@ -12,5 +12,12 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return "Server is up";
+});
+
+	
+
+$router->group(['prefix' => '/api/'], function() use ($router){
+	$router->get('/','CarrosController@listaCarros');
+	$router->get('/{id}','CarrosController@detalhesVeiculo');
 });
