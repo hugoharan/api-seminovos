@@ -67,7 +67,7 @@ class CarrosController extends Controller
 
     public function detalhesVeiculo($id){
         $model = new Carro;
-        $response = $model->listaCarros($id);
+        $response = $model->detalhesVeiculo($id);
 
         return $response;
     }

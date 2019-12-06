@@ -56,7 +56,55 @@ class Carro extends Model
             return response()->json($response, 200);
         }
         else{
-            return response()->json('{"Nenhum resultado encontrado."}', 200);
+            return response()->json('Nenhum resultado encontrado.', 400);
         }
+    }
+
+    public static function detalhesVeiculo($id){
+        
+        $resultado = @file_get_contents("https://seminovos.com.br/".$id);
+        //lê o DOM da página desejada
+        $crawler = new Crawler($resultado);
+
+        $marcaModelo = $crawler->filter('.item-info')->children('h1')->text();
+        $versao =  $crawler->filter('.item-info')->children('div > p')->text();
+        $preco =  $crawler->filter('.item-info')->children('.price')->text();
+        $anoModelo = $crawler->filter('.attr-list')->children('dl > dd >span')->eq(0)->text();
+        $km = $crawler->filter('.attr-list')->children('dl > dd >span')->eq(1)->text();
+        $cambio = $crawler->filter('.attr-list')->children('dl > dd >span')->eq(2)->text();
+        $portas = $crawler->filter('.attr-list')->children('dl > dd >span')->eq(3)->text();
+        $combustivel = $crawler->filter('.attr-list')->children('dl > dd >span')->eq(4)->text();
+        $cor = $crawler->filter('.attr-list')->children('dl > dd >span')->eq(5)->text();
+        $placa = $crawler->filter('.attr-list')->children('dl > dd >span')->eq(6)->text();
+        $troca = $crawler->filter('.attr-list')->children('dl > dd >span')->eq(7)->text();
+        $obs = $crawler->filter('.meta-properties')->children('.description-print')->text();
+        $images = $crawler->filter('.gallery-main')
+                        ->children('.gallery-thumbs > ul > li > img')
+                        ->each(function($feature) {
+                            return $feature->attr('src');
+                        });
+        $listaAcessorios = $crawler->filter('.full-features')
+                        ->children('ul > li > span')
+                        ->each(function($feature) {
+                            return $feature->text();
+                        });
+
+          
+        $response = array(  'id' => $id,
+                            'marcaModelo' => $marcaModelo,
+                            'preco' => $preco,
+                            'versao' => $versao,
+                            'ano' => $anoModelo,
+                            'km' => $km,
+                            'cambio' => $cambio,
+                            'cor' => $cor,
+                            'placa' => $placa,
+                            'troca' => $troca,
+                            'obs' => $obs,
+                            'img' => $images,
+                            'listaAcessorios' => $listaAcessorios
+                            );
+
+        return $response;
     }
 }
