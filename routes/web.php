@@ -15,8 +15,6 @@ $router->get('/', function () use ($router) {
     return "Server is up";
 });
 
-	
-
 $router->group(['prefix' => '/api/'], function() use ($router){
 	$router->get('/','CarrosController@listaCarros');
 	$router->get('/{id}','CarrosController@detalhesVeiculo');
