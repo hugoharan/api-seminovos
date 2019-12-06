@@ -113,9 +113,11 @@ Esta API possui basicamente dois endpoints, um para consulta de veículos de aco
 	 http://localhost:8080/api/{id}
 	```
 	**Parâmetros da URL**
-	| Campo|tipo  |Descrição|Observação|
+
+	| Campo|tipo|Descrição|Observação|
 	|--|--|--|--|
-	| id |int  | Id do veículo | Campo obrigatório|
+	| id |int | Id do veículo | Campo obrigatório|
+
 	**Exemplo de resposta**
 	```JS
 	{
