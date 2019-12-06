@@ -115,7 +115,7 @@ Esta API possui basicamente dois endpoints, um para consulta de veículos de aco
 	**Parâmetros da URL**
 	| Campo|tipo  |Descrição|Observação|
 	|--|--|--|--|
-	| id |int  | Id do veículo | Campo obrigatório
+	| id |int  | Id do veículo | Campo obrigatório|
 	**Exemplo de resposta**
 	```JS
 	{
